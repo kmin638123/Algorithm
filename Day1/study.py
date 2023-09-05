@@ -1,7 +1,6 @@
 n, m = map(int, input().split())
 b = sorted(list(map(int, input().split())))
 temp = []
-
 def dfs(depth):
     if len(temp) == m:
         print(*temp)
