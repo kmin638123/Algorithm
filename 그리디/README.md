@@ -86,13 +86,12 @@
     -각 단계에서 __사이클을 이루지 않는__ 최소 비용 간선을 선택한다. 
     
     >    1. 그래프 간선들을 가중치의 오름차순으로 정렬  
-
     >    2. 정렬된 간선 그래프에서 순서대로 사이클을 형성하지 않는 간선 선택
-    >   * [__union-find 알고리즘__]() 사용!
+    >   * [__union-find 알고리즘__](https://github.com/kmin638123/Algorithm/blob/master/%EC%84%9C%EB%A1%9C%EC%86%8C%20%EC%A7%91%ED%95%A9/README.md#%EC%84%9C%EB%A1%9C%EC%86%8C-%EC%A7%91%ED%95%A9) 사용!
     >   3. 해당 간선을 현재의 MST의 집합에 추가.
     >   * MST: 스패닝 트리 중에서 사용된 간선들의 가중치 합이 최소인 트리
     
-    <span style="color:gray">(출처: [알고리즘] Kruskal 알고리즘 이란https://gmlwjd9405.github.io/2018/08/29/algorithm-kruskal-mst.html)</span>
+    <span style="color:gray">(출처: [[알고리즘] Kruskal 알고리즘 이란](https://gmlwjd9405.github.io/2018/08/29/algorithm-kruskal-mst.html))</span>
     
 
     </div>
