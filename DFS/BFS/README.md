@@ -52,7 +52,7 @@ __특정 조건을 만족하는 경우__ 에만  __DFS 탐색__ 을 진행하는
 * 대표 유형 문제: [N-Queen](https://www.acmicpc.net/problem/9663)
   * 유망한 노드: 가로, 세로, 대각선에 퀸이 없는 좌표 
 
-## BFS구현
+## BFS 구현
 
 ```python
 from collections import deque
