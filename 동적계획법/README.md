@@ -62,7 +62,7 @@
   * 제외하는 병사의 수를 최소로, 병사들의 전투력이 내림차순이 돼야 한다.
   * __가장 긴 증가하는 부분 수열__(LIS) 알고리즘 이용해서 가장 긴 감소하는 부분 수열을 찾는 문제
     * LIS 점화식:  D[i]가 array[i]를 마지막 원소로 갖는 부분 수열의 최대 길이일 때,   
-    모든 $j\leq i$에 대해, $D[i] = max(D[i], D[j]+1)$ if $array[j]<array[i]$
+    모든 $j\leq i$에 대해, $D[i] = max(D[i], D[j]+1)$ if array[j] < array[i]
   * __bottom up__ 방식
 
   ```python
