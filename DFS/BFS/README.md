@@ -54,6 +54,8 @@ __특정 조건을 만족하는 경우__ 에만  __DFS 탐색__ 을 진행하는
 
 ## BFS 구현
 
+bfs의 결과는 __항상 최단 경로__!!
+
 ```python
 from collections import deque
 
