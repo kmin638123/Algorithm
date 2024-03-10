@@ -1,0 +1,36 @@
+# dp 풀이
+# 시간 초과
+
+# import math
+
+# n = int(input())
+
+# dp = [0,1]
+
+# for i in range(2, n+1):
+#     min_value = 4
+#     for j in range(1, int(math.sqrt(i))+1):
+#         min_value = min(min_value, dp[i-j**2])
+#     dp.append(min_value+1)
+
+# print(dp[n])
+#####################################
+# 브루트 포스
+import math
+n = int(input())
+
+def squares(n):
+    if int(math.sqrt(n)) == math.sqrt(n):
+        return 1
+    
+    for i in range(1, int(math.sqrt(n))+1):
+        if int(math.sqrt(n-i**2)) == math.sqrt(n-i**2):
+            return 2
+        
+    for i in range(1, int(math.sqrt(n))+1):
+        for j in range(1, int(math.sqrt(n-i**2))+1):
+            if int(math.sqrt(n-i**2-j**2))==math.sqrt(n-i**2-j**2):
+                return 3
+    return 4
+
+print(squares(n))
