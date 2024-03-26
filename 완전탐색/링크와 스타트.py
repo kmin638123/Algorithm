@@ -31,14 +31,15 @@ n = int(input())
 table = [list(map(int, input().split())) for _ in range(n)]
 
 sum_stat = [sum(i) + sum(j) for i, j in zip(table, zip(*table))] 
+print(list(zip(*table)))
+print(list(zip(table, zip(*table))))
 
 total = sum(sum_stat) // 2 # 모든 값 합의 절반
 
 ans = 1e9
 
-for i in range(n//2):
-    for l in combinations(sum_stat, i+1):
-        # print(l)
-        ans = min(ans, abs(total - sum(l))) # 모든 값의 절반 - 그 뽑은 2개 합의 차 = start팀 - link팀
+for l in combinations(sum_stat, n//2):
+    # print(l)
+    ans = min(ans, abs(total - sum(l))) # 모든 값의 절반 - 그 뽑은 2개 합의 차 = start팀 - link팀
 
 print(ans)
