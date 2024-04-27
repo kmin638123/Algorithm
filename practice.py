@@ -90,4 +90,62 @@
             
 # print(sum(dp[-1]) % 1000000000)
 
-#
+# # 백준 1106
+# import sys
+# input = sys.stdin.readline
+
+# c, n = map(int, input().split())
+# info = [list(map(int, input().split())) for _ in range(n)]
+# info.sort(key = lambda x: (x[1],x[0]))
+
+# dp = [0] + [1e9] * (c+info[-1][1])
+
+# for i in range(1, len(dp)):
+#     for j in range(n):
+#         p = info[j]
+#         if i-p[1]<=0:
+#             dp[i] = min(dp[i], p[0])
+#         else:
+#             dp[i] = min(dp[i], dp[i-p[1]]+p[0])
+            
+# print(dp[c])
+
+# # 백준 2293
+# import sys
+# input = sys.stdin.readline
+
+# n, k = map(int, input().split())
+# coins = list(int(input()) for _ in range(n))
+# coins.sort()
+
+# dp = [0] * (k+1)
+
+# for coin in coins:
+#     for i in range(1, k+1):
+#         if i-coin>0:
+#             dp[i]+=dp[i-coin]
+#         elif i==coin:
+#             dp[i] += 1
+            
+# print(dp[-1])
+
+# 백준 2294
+import sys
+input = sys.stdin.readline
+
+n, k = map(int, input().split())
+coins = list(int(input()) for _ in range(n))
+coins.sort()
+
+dp = [1e9] * (k+1)
+
+for i in range(1, k+1):
+    for coin in coins:
+        if i<coin:
+            pass
+        elif i ==coin:
+            dp[i] = 1
+        else:
+            dp[i] = min(dp[i], dp[i-coin]+1)
+
+print(dp[-1] if dp[-1]!=1e9 else -1)
