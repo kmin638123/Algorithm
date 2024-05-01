@@ -108,7 +108,9 @@ int[] grade3;
 int[] grade4;
 grade4 = new int[]{70, 90, 80};       // 이미 선언된 배열은 이 방법으로만 초기화할 수 있음.
 ```
-
+>- 배열 정렬하기
+>    * Array.sort(배열이름)
+>    * Array.sort(배열이름, 시작 index, 끝 index)
 >- 다차원 배열
 >    * 2차원 배열: int[][] arr = new int[2][3];
 >    * 가변 배열: 2차원 배열을 생성할 때, 열의 길이를 명시하지 않음으로써 행마다 다른 길이의 배열을 요소로 저장할 수 있다.
@@ -123,4 +125,132 @@ int[][] arr = new int[3][];
 arr[0] = new int[2];
 arr[1] = new int[4];
 arr[2] = new int[1];
+```
+>- Array와 List의 차이
+|Array|List|
+|---|---|
+|정해진 공간이 있고, 인덱스가 존재|인덱스가 없고, 앞의 요소가 삭제되면 새로 추가되는 요소가 그 공간에 저장될 수 있음|
+|객체 생성시 크기 할당 필수|크기 할당 필요 X|
+|삽입/삭제: 느림|삽입/삭제: 빠름|
+|데이터 조회: 빠름|데이터 조회: 느림|
+|크기: length|크기: size|
+
+6. Collection
+>- 많은 수의 데이터를 그 사용 목적에 적합한 자료구조로 묶어 하나로 그룹화한 객체
+>- 컬렉션의 종류: Set, List, Queue, Map, Stack
+>    * HashSet, TreeSet / LinkedList, Vector, ArrayList / LinkedList, PriorityQueue / Hashtable, HashMap, TreeMap
+>- 주요 메서드
+>    * boolean add(E e) : 현재 컬렉션에 데이터 객체 e를 추가
+>    * boolean addAll (Collection c) : 현재 컬렉션에 컬렉션 c의 모든 데이터를 추가
+>    * boolean contains(Object o) : 현재 컬렉션에 객체 o의 포함 여부를 반환
+>    * boolean containsAll(Collection c) : 현재 컬렉션에 컬렉션 c의 모든 데이터가 포함되어있는지 여부를 반환
+>    * boolean remove(Object o) : 현재 컬렉션에서 객체 o를 삭제
+>    * boolean removeAll(Collection c) : 현재 컬렉션에서 컬렉션 c와 일치하는 데이터를 삭제
+>    * boolean retainAll(Collection<?> c) : 현재 컬렉션에서 컬렉션 c와 일치하는 데이터만 남기고 나머지는 삭제
+>    * void clear( ) : 현재 컬렉션의 모든 데이터를 삭제
+>    * int size( ) : 현재 컬렉션에 포함된 데이터 개수를 반환 
+>    * boolean isEmpty( ) : 현재 컬렉션이 비어있는지 여부를 반환
+
+
+
+7. ArrayList
+>- ArrayList는 Array와 List의 장점을 합친 것으로, 컬렉션의 한 종류이다.
+>    * index로 식별자를 쓰는 것이 가능하고, 리스트 특성 그대로 크기를 동적으로 사용할 수 있다.
+>- 선언 및 초기화
+```java
+ArrayList<Integer> integers1 = new ArrayList<Integer>(); // 타입 지정
+ArrayList<Integer> integers2 = new ArrayList<>(); // 타입 생략 가능
+ArrayList<Integer> integers3 = new ArrayList<>(10); // 초기 용량(Capacity) 설정
+ArrayList<Integer> integers4 = new ArrayList<>(integers1); // 다른 Collection값으로 초기화
+ArrayList<Integer> integers5 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5)); // Arrays.asList()
+```
+>- 주요 메서드
+>    * list.set(0, 15); idx 값을 value로 수정
+>    * list.remove(0); idx 값 또는 삭제할 값
+>    * list.indexOf(0); // indexOf는 찾고자 하는 값의 위치를 return (값이 없으면 -1 return)
+
+
+8. 스트림
+>- __스트림__: 람다를 활용해 배열과 컬렉션을 함수형으로 간단하게 처리할 수 있는 기술
+>- 스트림의 특징
+>    * 원본 데이터 소스를 변경하지 않고, 읽기만 한다.
+>    * 일회용으로, 한 번 사용하면 닫혀서 재사용이 불가능
+>    * 작업을 내부 반복으로 처리한다: forEach()는 매개변수에 대입된 람다식을 데이터 소스의 모든 요소에 적용한다.
+>- 스트림 만들기
+>    * 배열 스트림: Arrays.stream()
+>    * 컬렉션 스트림: .stream()
+>- 중간 연산(가공하기)
+>    * Filtering: 스트림 내 요소들을 하나씩 평가해서 걸러냄
+>    * Mapping: 스트림 내 요소들을 하나씩 특정 값으로 변환하는 작업
+>    * Sorting: 스트림 내 요소들을 정렬하는 작업
+```java
+List<String> list = Arrays.asList("a","b","c");
+
+// Filtering
+Stream<String> stream = list.stream().filter(list -> list.contains("a"));
+
+// Mapping
+Stream<String> stream = list.stream()
+	.map(String::toUpperCase);
+	//[A,B,C]
+    
+    .map(Integers::parseInt);
+    // 문자열 -> 정수로 변환
+
+// Sorting
+Stream<String> stream = list.stream()
+	.sorted() // [a,b,c] 오름차순 정렬
+    .sorted(Comparator.reverseOrder()) // [c,b,a] (내림차순)
+    
+List<String> list = Arrays.asList("a","bb","ccc");
+Stream<String> stream = list.stream()
+	.sorted(Comparator.comparingInt(String::length)) // [ccc,bb,a] //문자열 길이 기준 정렬
+
+// 기타 연산
+Stream<String> stream = list.stream()
+	.distinct() // 중복 제거
+    .limit(max) // 최대 크기 제한
+    .skip(n)    // 앞에서부터 n개 skip하기
+    .peek(System.out::println) // 중간 작업결과 확인
+```
+>- 최종 연산 (결과 만들기)
+>    * Calculating: 최소, 최대, 합, 평균 등의 연산 수행 
+>    * Reduction: 스트림의 요소를 하나씩 줄여가며 누적연산 수행
+>    * Collecting: 스트림의 요소를 원하는 자료형으로 변환
+>    * Matching: 특정 조건을 만족하는 요소가 있는 체크; anyMatch, allMatch, noneMatch
+>    * Iterating: forEach로 스트림을 돌며 실행되는 작업
+>    * Finding: 스트림에서 하나의 요소를 반환
+```java
+// Calculating
+IntStream stream = list.stream()
+	.count()   //스트림 요소 개수 반환
+    .sum()     //스트림 요소의 합 반환
+    .min()     //스트림의 최소값 반환
+    .max()     //스트림의 최대값 반환
+    .average() //스트림의 평균값 반환
+
+// Reduction
+IntStream stream = IntStream.range(1,5);
+	.reduce(10, (total,num)->total+num);
+    //reduce(초기값, (누적 변수,요소)->수행문)
+    // 10 + 1+2+3+4+5 = 25
+
+// Matching
+List<String> members = Arrays.asList("Lee", "Park", "Hwang");
+boolean matchResult = members.stream()
+						.anyMatch(members->members.contains("w")); //w를 포함하는 요소가 있는지, True
+boolean matchResult = members.stream()
+						.allMatch(members->members.length() >= 4); //모든 요소의 길이가 4 이상인지, False
+boolean matchResult = members.stream()
+						.noneMatch(members->members.endsWith("t")); //t로 끝나는 요소가 하나도 없는지, True
+
+//Iterating
+members.stream()
+	.map(Person::getName)
+    .forEach(System.out::println);
+
+// Finding
+Person person = members.stream()
+					.findAny()   //먼저 찾은 요소 하나 반환, 병렬 스트림의 경우 첫번째 요소가 보장되지 않음
+                    .findFirst() //첫번째 요소 반환
 ```
