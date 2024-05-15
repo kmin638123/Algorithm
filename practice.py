@@ -129,23 +129,78 @@
             
 # print(dp[-1])
 
-# 백준 2294
+# # 백준 2294
+# import sys
+# input = sys.stdin.readline
+
+# n, k = map(int, input().split())
+# coins = list(int(input()) for _ in range(n))
+# coins.sort()
+
+# dp = [1e9] * (k+1)
+
+# for i in range(1, k+1):
+#     for coin in coins:
+#         if i<coin:
+#             pass
+#         elif i ==coin:
+#             dp[i] = 1
+#         else:
+#             dp[i] = min(dp[i], dp[i-coin]+1)
+
+# print(dp[-1] if dp[-1]!=1e9 else -1)
+
+# # 백준 15486
+# import sys
+# input = sys.stdin.readline
+
+# n = int(input())
+# schedule = [list(map(int, input().split())) for _ in range(n)]
+
+# dp = [0] * (n+1)
+# for i in range(n):
+#     dp[i+1] = max(dp[i],dp[i+1])
+#     t, p = schedule[i]
+#     if i+t<=n:
+#         dp[i+t] = max(dp[i+t], dp[i]+p)
+# # print(dp)
+# print(dp[-1])  
+
+# # 백준 1106
+# import sys
+# input = sys.stdin.readline
+
+# c, n = map(int, input().split())
+# city = [list(map(int, input().split())) for _ in range(n)]
+# city.sort(key= lambda x:(x[1],x[0]))
+
+# dp = [0]+[1e9] * (c+city[-1][1])
+
+# for i in range(1,len(dp)):
+#     for cost, num in city:
+#         if i <= num: 
+#             dp[i] = min(dp[i],cost)
+#         else:
+#             dp[i] = min(dp[i], dp[i-num]+cost)
+
+# # print(dp)
+# print(min(dp[c:]))
+
+# 백준 12865
 import sys
 input = sys.stdin.readline
 
 n, k = map(int, input().split())
-coins = list(int(input()) for _ in range(n))
-coins.sort()
+obj = [[0,0]]+[list(map(int, input().split())) for _ in range(n)]
 
-dp = [1e9] * (k+1)
+dp = [[0]*(k+1) for _ in range(n+1)]
 
-for i in range(1, k+1):
-    for coin in coins:
-        if i<coin:
-            pass
-        elif i ==coin:
-            dp[i] = 1
+for i in range(1, n+1):
+    w, v= obj[i]
+    for j in range(1, k+1):
+        if j < w:
+            dp[i][j] = dp[i-1][j]
         else:
-            dp[i] = min(dp[i], dp[i-coin]+1)
-
-print(dp[-1] if dp[-1]!=1e9 else -1)
+            dp[i][j] = max(dp[i-1][j], dp[i-1][j-w]+v)
+            
+print(dp[n][k])    
