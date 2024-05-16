@@ -186,21 +186,52 @@
 # # print(dp)
 # print(min(dp[c:]))
 
-# 백준 12865
+# # 백준 12865
+# import sys
+# input = sys.stdin.readline
+
+# n, k = map(int, input().split())
+# obj = [[0,0]]+[list(map(int, input().split())) for _ in range(n)]
+
+# dp = [[0]*(k+1) for _ in range(n+1)]
+
+# for i in range(1, n+1):
+#     w, v= obj[i]
+#     for j in range(1, k+1):
+#         if j < w:
+#             dp[i][j] = dp[i-1][j]
+#         else:
+#             dp[i][j] = max(dp[i-1][j], dp[i-1][j-w]+v)
+            
+# print(dp[n][k])    
+
+# # 백준 11053
+# import sys
+# input = sys.stdin.readline
+
+# n = int(input())
+# A = list(map(int, input().split()))
+
+# dp = [1] * n
+
+# for i in range(1,n):
+#     for j in range(0,i):
+#         if A[j] < A[i]:
+#             dp[i] = max(dp[i],dp[j]+1)
+            
+# print(max(dp))
+
+# 백준 11055
 import sys
 input = sys.stdin.readline
 
-n, k = map(int, input().split())
-obj = [[0,0]]+[list(map(int, input().split())) for _ in range(n)]
+n = int(input())
+arr = list(map(int, input().split()))
 
-dp = [[0]*(k+1) for _ in range(n+1)]
+dp = [i for i in arr]
 
-for i in range(1, n+1):
-    w, v= obj[i]
-    for j in range(1, k+1):
-        if j < w:
-            dp[i][j] = dp[i-1][j]
-        else:
-            dp[i][j] = max(dp[i-1][j], dp[i-1][j-w]+v)
-            
-print(dp[n][k])    
+for i in range(1 ,n):
+    for j in range(0,i):
+        if arr[i]>arr[j]:
+            dp[i] = max(dp[i], dp[j]+arr[i])
+print(max(dp))
